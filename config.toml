@@ -2,7 +2,7 @@ DefaultContentLanguage = "ja"             # ビルド時のデフォルト言語
 languageCode = "ja-JP"                    # 公開するページの言語指定
 hasCJKLanguage = true
 
-baseurl = "https://adoring-villani-c3bf6e.netlify.com/"   # 公開時のベースとなるURL
+baseurl = "https://d-YAMA.netlify.com/"   # 公開時のベースとなるURL
 title = "D.YAMA blog"                     # サイトのメインタイトル
 theme = "hugo-phlat-theme"                # サイトで使用するテーマ名
 
