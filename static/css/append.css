@@ -1,0 +1,33 @@
+.dym-append h1 {
+    border-bottom: solid 3px #1993ff;
+    border-left: solid 12px #1993ff;
+    font-size: 24px;
+    padding-top: 10px;
+    padding-left: 24px;
+    padding-bottom: 10px;
+    margin-top: 42px;
+    margin-bottom: 36px;
+}
+
+.dym-append h2 {
+    border-bottom: solid 3px #1993ff;
+    font-size: 20px;
+    padding-left: 8px;
+    padding-bottom: 8px;
+    margin-top: 42px;
+    margin-bottom: 36px;
+}
+.dym-append #title {
+    border-bottom: solid 3px #1993ff;
+    border-left: solid 0px #1993ff;
+    font-size: 28px;
+    padding-left: 0px;
+    padding-bottom: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.mvp-banner {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

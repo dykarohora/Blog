@@ -1,0 +1,32 @@
+DefaultContentLanguage = "ja"             # ビルド時のデフォルト言語指定
+languageCode = "ja-JP"                    # 公開するページの言語指定
+hasCJKLanguage = true
+
+baseurl = "https://yourname.github.io/"   # 公開時のベースとなるURL
+title = "D.YAMA blog"                     # サイトのメインタイトル
+theme = "hugo-phlat-theme"                # サイトで使用するテーマ名
+
+enableEmoji = true
+
+[permalinks]
+  post = "/:year/:month/:slug/"           # post タイプページのパーマネントリンク構成
+  page = "/:slug/"                        # page タイプページのパーマネントリンク構成
+
+[taxonomies]
+  tag = "tags"                            # タググループ名
+  category = "categories"                 # カテゴリグループ名
+
+[params]
+  keywords = ["programming", "developer"] # 生成ページに keywords 指定がないときのデフォルト値 (meta keywords)
+  description = "my tech notes"           # 生成ページに description 指定がないときのデフォルト値 (meta description)
+  twitter = "https://twitter.com/dy_karous?lang=ja"
+
+[[menu.header]]
+  name = "Home"
+  weight = 1
+  url = "/"
+
+[[menu.header]]
+  name = "Portfolio"
+  weight = 1
+  url = "/portfolio"
