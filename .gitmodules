@@ -1,0 +1,3 @@
+[submodule "hugo-phlat-theme"]
+path = themes/hugo-phlat-theme
+url=git://github.com/nraboy/hugo-phlat-theme.git
