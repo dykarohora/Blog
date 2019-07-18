@@ -8,6 +8,9 @@ theme = "hugo-phlat-theme"                # サイトで使用するテーマ名
 
 enableEmoji = true
 
+[blackfriday]
+  hrefTargetBlank = true
+
 [permalinks]
   post = "/:year/:month/:slug/"           # post タイプページのパーマネントリンク構成
   page = "/:slug/"                        # page タイプページのパーマネントリンク構成
