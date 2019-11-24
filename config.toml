@@ -2,6 +2,8 @@ DefaultContentLanguage = "ja"             # ビルド時のデフォルト言語
 languageCode = "ja-JP"                    # 公開するページの言語指定
 hasCJKLanguage = true
 
+pygmentsCodeFences = true
+
 baseurl = "https://blog-mk2.d-yama7.com/"   # 公開時のベースとなるURL
 title = "D.YAMA blog"                     # サイトのメインタイトル
 theme = "hugo-phlat-theme"                # サイトで使用するテーマ名
