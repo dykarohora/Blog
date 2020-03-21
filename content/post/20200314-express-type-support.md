@@ -4,7 +4,8 @@ date: 2020-03-14T20:42:11+09:00
 slug: "20200314_express-reqres-generics"
 author: "d_yama"
 draft: false
-categories: ["typescript"]
+categories: ["TypeScript"]
+tags: ["TypeScript", "Node.js", "Express"]
 ---
 
 # Expressをもっとタイプセーフに
