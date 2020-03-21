@@ -177,7 +177,7 @@ const FULFILLED = 1
 const REJECTED = 2
 ```
 
-まんま`オブザーバーパターン`ですね。親Promiseオブジェクトが持つ配列に、子Promiseオブジェクトと、`then`に渡す親Promiseが成功/失敗したときのコールバック関数をそれぞれキャッシュします。のちほど親Promiseの状態が`FULFILLED`か`REJECTED`に遷移したときにキャッシュから関数が取り出され実行されます。
+まんまオブザーバーパターンですね。親Promiseオブジェクトが持つ配列に、子Promiseオブジェクトと、`then`に渡す親Promiseが成功/失敗したときのコールバック関数をそれぞれキャッシュします。のちほど親Promiseの状態が`FULFILLED`か`REJECTED`に遷移したときにキャッシュから関数が取り出され実行されます。
 
 `then`に渡した関数がPromiseコンストラクタに渡した非同期処理が完了したタイミングで実行される仕組みがなんとなく見えてきたので、`initializePromise`に戻って`resolve`の実態が何なのかをみてます。
 
