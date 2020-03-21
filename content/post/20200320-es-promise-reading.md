@@ -10,7 +10,7 @@ tags: ["JavaScript", "Node.js", "Promise"]
 
 # Node.jsでPromiseは欠かせない
 
-Node.js（というかJavaScriptやTypeScript）で非同期処理を書くにあたって、`Promise`や`async/await`は欠かせないものになっていると思っています。しかし、`Promise`の使い方はわかっていたとしても、その裏側でどのように動作しているのかはあまりよくわかっていませんでした。正しい使い方さえわかっていれば、それはそれでいいと思いますが、気になったら調べずにはいられないので実装を追ってみることにしました。
+Node.js（というかJavaScriptやTypeScript）で非同期処理を書くにあたって、`Promise`や`async/await`は欠かせないものになっていると思っています。しかし、`Promise`の使い方はわかっていたとしても、その裏側でどのように動作しているのかはあまりよくわかっていませんでした。正しい使い方さえわかっていればそれはそれでいいと思いますが、気になったら調べずにはいられないので実装を追ってみることにしました。
 
 `Promise`はNode.jsにも組み込まれていますし、[Q](https://github.com/kriskowal/q)や[Bluebird](https://github.com/petkaantonov/bluebird)といった実装が存在しますが、今回はES6のPromiseと互換性のある[es6-promiseの実装](https://github.com/stefanpenner/es6-promise)を調べてみました。
 
