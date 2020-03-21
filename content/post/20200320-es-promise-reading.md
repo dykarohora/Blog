@@ -2,6 +2,7 @@
 title: "es6-promiseのコードを読んでみた"
 date: 2020-03-20T12:23:02+09:00
 slug: "20200320_es6-promise-reading"
+author: "d_yama"
 draft: false
 categories: ["JavaScript"]
 tags: ["JavaScript", "Node.js", "Promise"]
