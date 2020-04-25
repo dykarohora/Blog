@@ -10,17 +10,17 @@ tags: ["Azure Remote Rendering", "Azure"]
 
 # mixpaceと連携させてみた
 
-先日public previewで公開された[Azure Remote Rendering](https://azure.microsoft.com/ja-jp/services/remote-rendering/)(以下、AAR)について、mixpaceでもAAR用のアセットを作るコンバータのプロトタイプを作ってみました。
+先日public previewで公開された[Azure Remote Rendering](https://azure.microsoft.com/ja-jp/services/remote-rendering/)(以下、ARR)について、mixpaceでもARR用のアセットを作るコンバータのプロトタイプを作ってみました。
 
 <blockquote class="twitter-tweet"><p lang="ja" dir="ltr">mixpace にモデル(CAD/BIM/CG)を突っ込むと勝手にAzure Remote Renderingに入るようになったｗ <a href="https://twitter.com/hashtag/HoloLens?src=hash&amp;ref_src=twsrc%5Etfw">#HoloLens</a> <a href="https://twitter.com/hashtag/%E3%81%95%E3%81%99%E3%82%84%E3%81%BE?src=hash&amp;ref_src=twsrc%5Etfw">#さすやま</a> <a href="https://t.co/EsppFHlxp1">pic.twitter.com/EsppFHlxp1</a></p>&mdash; 中村 薫(Kaoru Nakamura)@HoloLab Inc. (@kaorun55) <a href="https://twitter.com/kaorun55/status/1248956512942211072?ref_src=twsrc%5Etfw">April 11, 2020</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-mixpaceはCADやBIMといった3DデータをコンバートしてHoloLens 2やiPad上のクライアントアプリで閲覧できるサービスなのですが、コンバート後のファイルフォーマットとして[GLB](https://www.khronos.org/gltf/)を採用しています。AARではアセットを作るためのデータソースとしてFBX、glTF、GLBをサポートしているのでmixpaceにとっては都合が良いです。
+mixpaceはCADやBIMといった3DデータをコンバートしてHoloLens 2やiPad上のクライアントアプリで閲覧できるサービスなのですが、コンバート後のファイルフォーマットとして[GLB](https://www.khronos.org/gltf/)を採用しています。ARRではアセットを作るためのデータソースとしてFBX、glTF、GLBをサポートしているのでmixpaceにとっては都合が良いです。
 
-AAR用のアセットを作るための方法として、[サンプルプロジェクトのリポジトリ](https://github.com/Azure/azure-remote-rendering)にてPowerShellスクリプトが公開されています。中身をみると分かるのですが、AAR用のアセットへのコンバートはREST APIを叩くだけで実行できます。
+ARR用のアセットを作るための方法として、[サンプルプロジェクトのリポジトリ](https://github.com/Azure/azure-remote-rendering)にてPowerShellスクリプトが公開されています。中身をみると分かるのですが、ARR用のアセットへのコンバートはREST APIを叩くだけで実行できます。
 
-今回はAAR用アセットの作り方を少し紹介したいと思います。
+今回はARR用アセットの作り方を少し紹介したいと思います。
 
-# AAR用アセットへのコンバート
+# ARR用アセットへのコンバート
 
 コンバートの手順はざっくり以下の通りです。
 
@@ -37,25 +37,25 @@ AAR用のアセットを作るための方法として、[サンプルプロジ�
 
 方法は問いません。[Storage Explorer](https://azure.microsoft.com/ja-jp/features/storage-explorer/)からアップロードしてもいいし、REST APIからアップロードしてもOKです。
 
-ドキュメントをみると、入力となるソースファイルを格納するコンテナと出力となるAAR用アセットを格納するコンテナを用意するように書いてありますが、同じコンテナにしても問題ありません。
+ドキュメントをみると、入力となるソースファイルを格納するコンテナと出力となるARR用アセットを格納するコンテナを用意するように書いてありますが、同じコンテナにしても問題ありません。
 
 ## コンバートジョブをトリガーするため、REST APIを実行する
 
 ### アクセストークンの取得
 
-model conversion REST APIにアクセスするためにはアクセストークンが必要となります。アクセストークンは専用のエンドポイントが用意されているのでそちらから取得できます。アクセストークン取得のためにはAARのAccountIDとAccess Keyが必要となります。（[確認方法はこちらのキャプチャを参考に](https://docs.microsoft.com/en-us/azure/remote-rendering/how-tos/create-an-account#create-an-account)）
+model conversion REST APIにアクセスするためにはアクセストークンが必要となります。アクセストークンは専用のエンドポイントが用意されているのでそちらから取得できます。アクセストークン取得のためにはARRのAccountIDとAccess Keyが必要となります。（[確認方法はこちらのキャプチャを参考に](https://docs.microsoft.com/en-us/azure/remote-rendering/how-tos/create-an-account#create-an-account)）
 
 ---
 
 * ドメイン
   * sts.mixedreality.azure.com
 * エンドポイント
-  * accounts/{AARのAccountID}/token
+  * accounts/{ARRのAccountID}/token
 * メソッド
   * GET
 * 必要なヘッダ
   * Authorization
-    * Bearer {AARのAccountID}:{AARのAccessKey}
+    * Bearer {ARRのAccountID}:{ARRのAccessKey}
 
 
 [リファレンス](https://docs.microsoft.com/en-us/azure/remote-rendering/how-tos/tokens#token-service-rest-api)
@@ -64,13 +64,13 @@ model conversion REST APIにアクセスするためにはアクセストーク�
 
 ### コンバート用APIの選択
 
-コンバート用のAPIは2つ用意されています。出力されるAAR用アセットに違いはなく、AARからBlob Storageへのアクセス方法の選択によって変わります。アクセス方法としてはIAMを使う方法とSASを使う方法があります。
+コンバート用のAPIは2つ用意されています。出力されるARR用アセットに違いはなく、ARRからBlob Storageへのアクセス方法の選択によって変わります。アクセス方法としてはIAMを使う方法とSASを使う方法があります。
 
 --- 
 
 ### IAMを使ってアクセスする
 
-Storage Accountに対して、`Owner`、`Storage Account Contributor`、`Storage Blob Data Contributor`のロールをAARのManaged Identityに割り当てます。[設定方法はこちら](https://docs.microsoft.com/en-us/azure/remote-rendering/how-tos/create-an-account#link-storage-accounts)。
+Storage Accountに対して、`Owner`、`Storage Account Contributor`、`Storage Blob Data Contributor`のロールをARRのManaged Identityに割り当てます。[設定方法はこちら](https://docs.microsoft.com/en-us/azure/remote-rendering/how-tos/create-an-account#link-storage-accounts)。
 
 設定完了後、APIを叩くとAzure上でコンバートが開始されます。
 
@@ -83,7 +83,7 @@ Storage Accountに対して、`Owner`、`Storage Account Contributor`、`Storage
     * remoterendering.westeurope.mixedreality.azure.com
     * remoterendering.westus2.mixedreality.azure.com
 * エンドポイント
-  * /v1/accounts/{AARのAccountID}/conversions/create
+  * /v1/accounts/{ARRのAccountID}/conversions/create
 * メソッド
   * POST
 * 必要なヘッダ
@@ -103,10 +103,10 @@ Storage Accountに対して、`Owner`、`Storage Account Contributor`、`Storage
     },
     "output":
     {
-        "storageAccountname": "AAR用アセットの出力先のストレージアカウントの名前",
-        "blobContainerName": "AAR用アセットの出力先のコンテナの名前",
-        "folderPath": "AAR用アセットの出力先のフォルダ名（オプション）",
-        "outputAssetFileName": "AAR用アセットのファイル名。拡張子を`.aarAsset`にする必要がある"
+        "storageAccountname": "ARR用アセットの出力先のストレージアカウントの名前",
+        "blobContainerName": "ARR用アセットの出力先のコンテナの名前",
+        "folderPath": "ARR用アセットの出力先のフォルダ名（オプション）",
+        "outputAssetFileName": "ARR用アセットのファイル名。拡張子を`.arrAsset`にする必要がある"
     }
 }
 ```
@@ -138,7 +138,7 @@ Storage Accountに対して、`Owner`、`Storage Account Contributor`、`Storage
     * remoterendering.westeurope.mixedreality.azure.com
     * remoterendering.westus2.mixedreality.azure.com
 * エンドポイント
-  * /v1/accounts/{AARのccountID}/conversions/createWithSharedAccessSignature
+  * /v1/accounts/{ARRのccountID}/conversions/createWithSharedAccessSignature
 * メソッド
   * POST
 * 必要なヘッダ
@@ -159,10 +159,10 @@ Storage Accountに対して、`Owner`、`Storage Account Contributor`、`Storage
     },
     "output":
     {
-        "storageAccountname": "AAR用アセットの出力先のストレージアカウントの名前",
-        "blobContainerName": "AAR用アセットの出力先のコンテナの名前",
-        "folderPath": "AAR用アセットの出力先のフォルダ名（オプション）",
-        "outputAssetFileName": "AAR用アセットのファイル名。拡張子を`.aarAsset`にする必要がある",
+        "storageAccountname": "ARR用アセットの出力先のストレージアカウントの名前",
+        "blobContainerName": "ARR用アセットの出力先のコンテナの名前",
+        "folderPath": "ARR用アセットの出力先のフォルダ名（オプション）",
+        "outputAssetFileName": "ARR用アセットのファイル名。拡張子を`.aarAsset`にする必要がある",
         "containerWriteSas" : "出力先のSAS"
     }
 }
@@ -193,7 +193,7 @@ Storage Accountに対して、`Owner`、`Storage Account Contributor`、`Storage
     * remoterendering.westeurope.mixedreality.azure.com
     * remoterendering.westus2.mixedreality.azure.com
 * エンドポイント
-  * /v1/accounts/{AARのAccountID}/conversions/{conversionId}
+  * /v1/accounts/{ARRのAccountID}/conversions/{conversionId}
     * `conversionId`はジョブ実行時のレスポンスから取得したもの
 * メソッド
   * GET
@@ -218,7 +218,7 @@ Storage Accountに対して、`Owner`、`Storage Account Contributor`、`Storage
 
 # まとめ
 
-AAR用のアセットを作る手順をまとめました。まだ各言語用のSDKは用意されていませんが、コンバートに必要なREST APIの種類も少なくシンプルなので実装に困ることはそれほどないかなと思います。今回作ったプロトタイプもNode.js + TypeScriptで[axios](https://github.com/axios/axios)を使って実装しました。
+ARR用のアセットを作る手順をまとめました。まだ各言語用のSDKは用意されていませんが、コンバートに必要なREST APIの種類も少なくシンプルなので実装に困ることはそれほどないかなと思います。今回作ったプロトタイプもNode.js + TypeScriptで[axios](https://github.com/axios/axios)を使って実装しました。
 
 # 参考
 

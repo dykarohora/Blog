@@ -3,7 +3,7 @@ title: "LeetCode - Single Number"
 date: 2020-04-25T09:19:17+09:00
 slug: "20200425-single-number"
 author: "d_yama"
-draft: true
+draft: false
 categories: ["algorithm"]
 tags: ["TypeScript", "algorithm"]
 ---
