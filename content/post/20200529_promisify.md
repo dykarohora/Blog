@@ -4,7 +4,7 @@ date: 2020-05-30T11:35:10+09:00
 slug: "20200529-promisify"
 author: "d_yama"
 draft: false
-categories: ["TypeScript"]
+categories: ["Azure"]
 tags: ["TypeScript", "Azure", "Azure Blob Storage", "Azure Table Storage"]
 ---
 
@@ -20,7 +20,7 @@ Azure StorageをNode.jsから使うときには[こちらのazure-storageとい�
 
 # まずは使ってみる
 
-基本、promisifyの引数に対象の関数オブジェクトを渡してあげるだけでよいのですが、BlobServiceやTableServiceのメソッドを変換するときは注意が必要で、promisifyから返ってきた関数に対しbindでthisの参照先を元のオブジェクトに指定しなければいけません。
+基本、`promisify`の引数に対象の関数オブジェクトを渡してあげるだけでよいのですが、BlobServiceやTableServiceのメソッドを変換するときは注意が必要で、`promisify`から返ってきた関数に対しbindでthisの参照先を元のオブジェクトに指定しなければいけません。
 
 ```typescript
 const storageAccountName = 'xxx'
@@ -32,7 +32,7 @@ const blobService: BlobService =
 const createContainerFunc = promisify(blobService.createContainer).bind(blobService)
 ```
 
-BlobServiceやTableServiceのメソッドは内部でthisを使用しています。また、[promisifyの実装](https://github.com/nodejs/node/blob/master/lib/internal/util.js#L277)を見てみると、引数で渡された関数オブジェクトをPromiseでラップしたようなものを返しています。すなわちpromisifyにメソッドを渡して得た関数はBlobServiceやTableServiceのメソッドではなくなってしまうため、bindでthisの参照先を指定してあげないと実行時にエラーを吐いてしまいます。
+BlobServiceやTableServiceのメソッドは内部でthisを使用しています。また、[promisifyの実装](https://github.com/nodejs/node/blob/master/lib/internal/util.js#L277)を見てみると、引数で渡された関数オブジェクトをPromiseでラップしたようなものを返しています。すなわち`promisify`にメソッドを渡して得た関数はBlobServiceやTableServiceのメソッドではなくなってしまうため、bindでthisの参照先を指定してあげないと実行時にエラーを吐いてしまいます。
 
 変換後はPromiseライクに任意のタイミングでawaitしたりすることが可能です。try-catchを使ってエラーレスポンスを補足することも可能です。
 
@@ -71,7 +71,7 @@ createContainer(
 このメソッドの第二引数にオブジェクトを渡そうとするとコンパイラの静的チェックにてエラーが出力されます。
 ![extension](/image/20200529_ws002.png)
 
-このようなときは、ジェネリクスなpromisifyを使うことによって解決できます。promisifyの型定義を見てみると次のようになっています。(一部だけ抜粋)
+このようなときは、ジェネリクスな`promisify`を使うことによって解決できます。`promisify`の型定義を見てみると次のようになっています。(一部だけ抜粋)
 
 ```typescript
 function promisify<T1, TResult>
@@ -101,7 +101,7 @@ await createContainerFunc('new-container', option)
 ```
 
 # 仮引数名をもっと表現力豊かにしたい
-これはちょっとした小ネタですが、promisefyで変換した関数のType Infoを見てみると、仮引数名が<i>arg1, arg2...</i>と機械的なものとして出てきます。型さえハッキリしていれば困ることはあまりないのですが、それでもちゃんと意味が分かる仮引数名であったほうがストレスは少ないです。
+これはちょっとした小ネタですが、`promisefy`で変換した関数のType Infoを見てみると、仮引数名が<i>arg1, arg2...</i>と機械的なものとして出てきます。型さえハッキリしていれば困ることはあまりないのですが、それでもちゃんと意味が分かる仮引数名であったほうがストレスは少ないです。
 
 ![extension](/image/20200529_ws003.png)
 
@@ -111,7 +111,7 @@ await createContainerFunc('new-container', option)
 
 # Table Storageへのクエリ
 
-Table Storageからクエリを使ってレコードを取得するメソッドとして、queryEntitiesメソッドがあります。これをpromisifyに通してみると、
+Table Storageからクエリを使ってレコードを取得するメソッドとして、queryEntitiesメソッドがあります。これを`promisify`に通してみると、
 
 ![extension](/image/20200529_ws005.png)
 
@@ -129,7 +129,7 @@ queryEntities<T>(
 ): void;
 ```
 
-となると、Promiseスタイルに変換したときもレコードに対してunknown型ではなく意図した型付けをしたくなります。こちらもpromisifyの型パラメータによって型情報を持たせることができます。
+となると、Promiseスタイルに変換したときもレコードに対してunknown型ではなく意図した型付けをしたくなります。こちらも`promisify`の型パラメータによって型情報を持たせることができます。
 
 ```typescript
 interface PeopleEntity {
