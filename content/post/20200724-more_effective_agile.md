@@ -1,6 +1,6 @@
 ---
 title: "「More Effective Agile」の感想"
-slug: "20200724 More_effective_agile"
+slug: "20200724-More_effective_agile"
 author: "d_yama"
 date: 2020-07-24T11:57:16+09:00
 draft: false

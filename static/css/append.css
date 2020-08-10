@@ -31,3 +31,11 @@
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.75;
+    color: #333;
+    background-color: #fff;
+  }
