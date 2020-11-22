@@ -1,6 +1,6 @@
 ---
 title: "TypeScriptとジェネレータ"
-slug: "20200627_typescript-collection"
+slug: "20201120_typescript-generator"
 author: "d_yama"
 date: 2020-11-20T17:10:00+09:00
 draft: false
