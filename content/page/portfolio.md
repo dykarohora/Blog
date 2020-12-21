@@ -8,20 +8,22 @@ draft: false
 
 # Skill Set
 - Programing Language
-  - C# ⭐⭐⭐⭐⭐
+  - C# ⭐⭐⭐
   - C++ ⭐
-  - TypeScript ⭐⭐⭐⭐
-  - JavaScript ⭐⭐⭐
-  - Swift ⭐⭐⭐
+  - TypeScript ⭐⭐⭐⭐⭐
+  - JavaScript ⭐⭐⭐⭐
+  - Swift ⭐
   - Kotlin ⭐
+  - Rust ⭐⭐
 - Engine/Framework
-  - UWP ⭐⭐⭐⭐⭐
+  - Node.js ⭐⭐⭐⭐⭐
+  - Vue.js/Nuxt.js ⭐⭐⭐⭐⭐
+  - UWP ⭐⭐⭐
   - .NET Framework ⭐⭐⭐
   - DirectX ⭐
-  - Reactive Extensions(UniRx, RxJS, RxSwift) ⭐⭐⭐⭐
-  - Vue.js/Nuxt.js ⭐⭐⭐⭐
-  - Spring Framework ⭐⭐
-  - Unity ⭐⭐⭐⭐⭐
+  - Reactive Extensions(RxJS, UniRx, RxSwift) ⭐⭐⭐⭐
+  - Spring Framework ⭐
+  - Unity ⭐⭐⭐
 
 # Award
 {{< figure src="/image/mvp-banner.png" class="" alt="mvp-banner" width="160" >}}
@@ -31,7 +33,7 @@ draft: false
 
 ## HoloLab, Inc. (Feb 2018 - )
 **xR/Web Engineer**  
-- Develop and mainain mixpace service.
+- Develop and maintain mixpace service.
 - Develop HoloLens application.
 - Develop drone application.
 
