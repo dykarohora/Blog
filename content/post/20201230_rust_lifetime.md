@@ -6,6 +6,7 @@ date: 2020-12-30T09:45:00+09:00
 draft: false
 categories: ["Rust"]
 tags: ["Rust"]
+aliases: ["ライフタイム"]
 ---
 
 # [前提] 借用規則
